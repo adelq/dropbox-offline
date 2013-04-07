@@ -1,0 +1,11 @@
+CACHE MANIFEST
+
+NETWORK:
+file-list.php
+/fs
+
+CACHE:
+index.php
+css/style.css
+css/images/sync.png
+js/sync.js
