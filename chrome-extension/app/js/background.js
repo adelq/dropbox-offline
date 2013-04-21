@@ -25,7 +25,7 @@ function fetchFileFromDropbox(filename) {
 			return console.log(error);
 		}
 	
-	fs.root.getFile(filename), {create:true, exclusive:true}, function(fileObject) {
+		fs.root.getFile(filename, {create:true, exclusive:true}, function(fileObject) {
 			fileObject.createWriter(function(fileWriter) {
 			
 			fileWriter.onwriteend = function(err) {
