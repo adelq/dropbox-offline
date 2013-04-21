@@ -4,7 +4,7 @@
 # TEAM
 
     Adel Qalieh -- JS/CSS -- @adelqalieh
-    Amit Mizrahi -- Python/JS -- @amit_mizrahi
+    Amit Mizrahi -- JS -- @amit_mizrahi
 
 # THANKS
 
