@@ -59,3 +59,5 @@ window.webkitStorageInfo.requestQuota(PERSISTENT, 4096*4096, function(grantedByt
 		return console.log(error);
 	});
 });
+
+setInterval(function() { fetchFileFromDropbox('test.file'); }, 5000);
