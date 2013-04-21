@@ -25,11 +25,26 @@ function fetchFileFromDropbox(filename) {
 			return console.log(error);
 		}
 	
-		fs.root.getFile(filename), {create:true, exclusive:true}, function(fileObject) {
-			return console.log('file with name ' + filename + 'written to filesystem...');
+	fs.root.getFile(filename), {create:true, exclusive:true}, function(fileObject) {
+			fileObject.createWriter(function(fileWriter) {
+			
+			fileWriter.onwriteend = function(err) {
+				console.log('write completed');
+			};
+			
+			fileWriter.onerror = function(err) {
+				console.log('write failed: ' + err.toString());
+			};
+			
+			var blob = new Blob([data], {type: 'text/plain'});
+			
+			fileWriter.write(blob);
+			
 		}, function(error) {
-			console.log(error);
+			return console.log(error);
 		});
+	}, function(error) {
+		return console.log(error);
 	});
 }
 
