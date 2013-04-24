@@ -34,7 +34,7 @@ var getListOfFilenames = function() {
 }
 
 var fetchFileFromDropbox = function(filename) {
-	apiClient.readFile('test.file', function(error, data) {
+	apiClient.readFile(filename, function(error, data) {
 		if(error) {
 			return console.log(error);
 		}
