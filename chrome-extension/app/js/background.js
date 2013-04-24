@@ -4,10 +4,11 @@ var client = new Dropbox.Client({
 });
 
 client.authDriver(new Dropbox.Drivers.Chrome({
-	// set up an auth driver that redirects the user to the auth screen
-	// after successful auth the user is redirected again, this time to 'receiver.html'
-	receiverPath: 'receiver.html'
-}));
+		// set up an auth driver that redirects the user to the auth screen
+		// after successful auth the user is redirected again, this time to 'receiver.html'
+		receiverPath: 'receiver.html'
+	})
+);
 
 client.authenticate(function(error, successClient) {
 	// authenticate the client using the auth driver
@@ -19,33 +20,50 @@ client.authenticate(function(error, successClient) {
 	// apiClient will be used to send API calls
 });
 
-function fetchFileFromDropbox(filename) {
+var getListOfFilenames = function() {
+	apiClient.metadata('/', {readDir: true}, function(error, data, listing) { 
+		// The third parameter of the callback, 'listing', contains the list of files in the folder.
+		if(error) {
+			console.log('There was an error: ' + error.toString());
+			return;
+		}
+		else {
+			return listing;
+		}
+	});
+}
+
+var fetchFileFromDropbox = function(filename) {
 	apiClient.readFile('test.file', function(error, data) {
 		if(error) {
 			return console.log(error);
 		}
+		
+		else {
 	
-		fs.root.getFile(filename, {create:true, exclusive:true}, function(fileObject) {
-			fileObject.createWriter(function(fileWriter) {
+			fs.root.getFile(filename, {create:true, exclusive:true}, function(fileObject) {
+				fileObject.createWriter(function(fileWriter) {
 			
-			fileWriter.onwriteend = function(err) {
-				console.log('write completed');
-			};
+					fileWriter.onwriteend = function(err) {
+						console.log('write complete');
+					};
 			
-			fileWriter.onerror = function(err) {
-				console.log('write failed: ' + err.toString());
-			};
+					fileWriter.onerror = function(err) {
+						console.log('write failed: ' + err.toString());
+					};
 			
-			var blob = new Blob([data], {type: 'text/plain'});
+					var blob = new Blob([data], {type: 'text/plain'});
 			
-			fileWriter.write(blob);
+					fileWriter.write(blob);
 			
-		}, function(error) {
-			return console.log(error);
-		});
-	}, function(error) {
-		return console.log(error);
-	});
+				}, function(error) {
+					return console.log(error);
+				});
+			}, function(error) {
+				return console.log(error);
+			});
+		}
+	}
 }
 
 // this part might be buggy because background processes might not have a window object
@@ -60,4 +78,10 @@ window.webkitStorageInfo.requestQuota(PERSISTENT, 4096*4096, function(grantedByt
 	});
 });
 
-setInterval(function() { fetchFileFromDropbox('test.file'); }, 5000);
+
+setInterval(function() { 
+	var fileNames = getListOfFilenames();
+	for(var i = 0; i < fileNames.length; i++) {
+		fetchFileFromDropbox(fileNames[i]);
+	}
+ }, 30000);
