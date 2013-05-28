@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Adel Qalieh -- JS/CSS -- @adelqalieh
+    Amit Mizrahi -- JS -- @amit_mizrahi
+
+# THANKS
+
+    Mary Miner, Technology Coordinator at International Academy
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3, HTML5 Filesystem
+    Normalize.css, jQuery, Modernizr, heyoffline.js, bootstrap.js, dropbox.js

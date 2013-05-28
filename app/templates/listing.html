@@ -1,8 +1,0 @@
-{% for file in files %}
-            <tr>
-                <td>{{ file.filename }}</td>
-                <td>{{ file.size }}</td>
-                <td>{{ file.date_modified }}</td>
-                <td><a class="downloader" id="{{ file.filename }}">Download</a></td>
-            </tr>
-{% endfor %}

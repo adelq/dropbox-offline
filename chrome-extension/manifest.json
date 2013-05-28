@@ -2,21 +2,31 @@
     "manifest_version": 2,
     "name": "Dropbox Offline",
     "description": "This extension leverages new HTML5 technologies to make recently changed Dropbox files available offline",
-    "version": "0.2",
+    "version": "0.3",
+    "default_locale": "en",
     "icons": {  "16": "icons/icon16.png",
                 "48": "icons/icon48.png",
                 "128": "icons/icon128.png"  },
     "permissions": [
-        "https://www.dropbox.com/*",
-        "https://api.dropbox.com/*",
+        "https://*.dropbox.com/*",
         "unlimitedStorage",
         "storage",
         "tabs",
-        "background"
+        "background",
+        "cookies",
+        "contentSettings"
     ],
     "background": {
-        "js": ["js/background.js","js/bootstrap.min.js"],
-        "css": ["css/bootstrap.min.css"]
+        "scripts": [
+            "js/background.js"
+        ],
+        "persistent": true
+    },
+    "options_page": "options/index.html",
+    "browser_action": {
+        "default_icon": "icons/icon19.png",
+        "default_title": "Dropbox Offline File Listing",
+        "default_popup": "html/browser_popup.html"
     },
     "content_scripts": [
         {
