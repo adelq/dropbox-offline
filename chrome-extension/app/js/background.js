@@ -15,13 +15,13 @@ client.authenticate(function(error, successClient) {
 	if(error) {
 		return console.log(error);
 	}
-	
+
 	var apiClient = successClient;
 	// apiClient will be used to send API calls
 });
 
 var getListOfFilenames = function() {
-	apiClient.metadata('/', {readDir: true}, function(error, data, listing) { 
+	apiClient.metadata('/', {readDir: true}, function(error, data, listing) {
 		// The third parameter of the callback, 'listing', contains the list of files in the folder.
 		if(error) {
 			console.log('There was an error: ' + error.toString());
@@ -31,31 +31,31 @@ var getListOfFilenames = function() {
 			return listing;
 		}
 	});
-}
+};
 
 var fetchFileFromDropbox = function(filename) {
 	apiClient.readFile(filename, function(error, data) {
 		if(error) {
 			return console.log(error);
 		}
-		
+
 		else {
-	
+
 			fs.root.getFile(filename, {create:true, exclusive:true}, function(fileObject) {
 				fileObject.createWriter(function(fileWriter) {
-			
+
 					fileWriter.onwriteend = function(err) {
 						console.log('write complete');
 					};
-			
+
 					fileWriter.onerror = function(err) {
 						console.log('write failed: ' + err.toString());
 					};
-			
+
 					var blob = new Blob([data], {type: 'text/plain'});
-			
+
 					fileWriter.write(blob);
-			
+
 				}, function(error) {
 					return console.log(error);
 				});
@@ -64,7 +64,7 @@ var fetchFileFromDropbox = function(filename) {
 			});
 		}
 	}
-}
+);};
 
 // this part might be buggy because background processes might not have a window object
 
@@ -79,7 +79,7 @@ window.webkitStorageInfo.requestQuota(PERSISTENT, 4096*4096, function(grantedByt
 });
 
 
-setInterval(function() { 
+setInterval(function() {
 	var fileNames = getListOfFilenames();
 	for(var i = 0; i < fileNames.length; i++) {
 		fetchFileFromDropbox(fileNames[i]);
