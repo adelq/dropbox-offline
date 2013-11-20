@@ -3,12 +3,16 @@
 
 # TEAM
 
-    Adel Qalieh -- JS/CSS -- @adelqalieh
+    Adel Qalieh -- JS/CSS -- @adelq
     Amit Mizrahi -- JS -- @amit_mizrahi
 
 # THANKS
 
     Mary Miner, Technology Coordinator at International Academy
+    
+# EVENT
+
+    MHacks Spring 2013 -- @mhacks
 
 # TECHNOLOGY COLOPHON
 
