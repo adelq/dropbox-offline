@@ -17,4 +17,4 @@
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3, HTML5 Filesystem
-    Normalize.css, jQuery, Modernizr, heyoffline.js, bootstrap.js, dropbox.js
+    Normalize.css, jQuery, Modernizr, dropbox.js, filer.js
